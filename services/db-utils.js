@@ -26,6 +26,10 @@ export const saveNewLogDB = async (newLog) => {
     const logDoc = new Log(newLog);
     const result = await logDoc.save();
 
+    if (result) {
+      console.log("New document saved!");
+    }
+
     await disconnectDB();
     return result;
   } catch (error) {
