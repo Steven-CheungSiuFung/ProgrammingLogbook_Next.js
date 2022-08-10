@@ -1,4 +1,4 @@
-import { saveNewLogDB } from "../services/db-utils";
+import { saveNewLogDB, readAllLogsDB } from "../services/db-utils";
 
 export const createNewLog = async (logData) => {
   const newLog = logData;
@@ -7,5 +7,14 @@ export const createNewLog = async (logData) => {
     return result;
   } catch (error) {
     console.error("create new log error", error);
+  }
+};
+
+export const getAllLogs = async () => {
+  try {
+    const result = await readAllLogsDB();
+    return result;
+  } catch (error) {
+    console.error("get all logs error", error);
   }
 };

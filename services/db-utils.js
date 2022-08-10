@@ -25,11 +25,23 @@ export const saveNewLogDB = async (newLog) => {
 
     const logDoc = new Log(newLog);
     const result = await logDoc.save();
-    console.log("new doc created ==> ", result);
-    await disconnectDB();
 
+    await disconnectDB();
     return result;
   } catch (error) {
     console.error("save new log to database fail", error);
+  }
+};
+
+export const readAllLogsDB = async () => {
+  try {
+    await connectDB();
+
+    const logs = await Log.find({}).select("title content date");
+
+    await disconnectDB();
+    return logs;
+  } catch (error) {
+    console.error("read logs from database fail", error);
   }
 };
