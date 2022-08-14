@@ -41,7 +41,7 @@ export const readAllLogsDB = async () => {
   try {
     await connectDB();
 
-    const logs = await Log.find({}).select("title content date");
+    const logs = await Log.find({}).sort("-date").select("title content date");
 
     await disconnectDB();
     return logs;

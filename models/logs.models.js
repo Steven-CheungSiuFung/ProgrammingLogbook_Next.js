@@ -1,7 +1,8 @@
 import { saveNewLogDB, readAllLogsDB } from "../services/db-utils";
 
 export const createNewLog = async (logData) => {
-  const newLog = logData;
+  const transformedDate = new Date(logData.date);
+  const newLog = { ...logData, date: transformedDate };
   try {
     const result = await saveNewLogDB(newLog);
     return result;
