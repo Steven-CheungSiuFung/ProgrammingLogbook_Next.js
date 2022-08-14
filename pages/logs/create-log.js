@@ -5,7 +5,7 @@ import classes from "./create-log.module.css";
 const CreateLogPage = () => {
   return (
     <div className={classes.container}>
-      <h1>create new log</h1>
+      <h1>Create New Log</h1>
       <CreateLogForm />
     </div>
   );

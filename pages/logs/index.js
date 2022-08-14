@@ -24,5 +24,6 @@ export const getStaticProps = async () => {
     props: {
       logsData: data,
     },
+    revalidate: 60 * 60 * 24,
   };
 };
