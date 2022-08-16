@@ -1,6 +1,19 @@
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]";
+
 import { createNewLog } from "../../../models/logs.models";
 
 const handler = async (req, res) => {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  if (!session) {
+    res.status(401).json({ message: "You are not authenticated" });
+    return;
+  }
+
   if (req.method === "POST") {
     const logData = req.body;
     if (!logData || !logData.title || !logData.date || !logData.content) {

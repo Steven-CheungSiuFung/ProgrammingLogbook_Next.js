@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Log from "../models/logs.mongo";
+import User from "../models/users.mongo";
 
 const connectDB = async () => {
   try {
@@ -47,5 +48,36 @@ export const readAllLogsDB = async () => {
     return logs;
   } catch (error) {
     console.error("read logs from database fail", error);
+  }
+};
+
+export const saveUserDB = async (newUser) => {
+  try {
+    await connectDB();
+
+    const user = new User(newUser);
+    const result = await user.save();
+
+    if (result) {
+      console.log("New User saved!");
+    }
+
+    await disconnectDB();
+    return result;
+  } catch (error) {
+    console.error("save new log to database fail", error);
+  }
+};
+
+export const getUserDB = async (userEmail) => {
+  try {
+    await connectDB();
+
+    const user = await User.findOne({ email: userEmail });
+
+    await disconnectDB();
+    return user;
+  } catch (error) {
+    console.error("get user from database fail", error);
   }
 };

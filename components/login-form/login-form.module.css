@@ -68,3 +68,10 @@
   margin-top: 1rem;
   cursor: pointer;
 }
+
+.error {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  color: red;
+}
