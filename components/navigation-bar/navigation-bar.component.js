@@ -15,6 +15,9 @@ const NavigationBar = () => {
         <Link href="/logs/create-log">
           <li className={classes.item}>POST</li>
         </Link>
+        <Link href="/login">
+          <li className={classes.item}>LOGIN</li>
+        </Link>
       </ul>
     </div>
   );

@@ -1,0 +1,70 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 2.5rem;
+}
+
+.loginForm {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+}
+
+@media screen and (max-width: 1100px) {
+  .loginForm {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .loginForm {
+    width: 70%;
+  }
+}
+
+.input {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+}
+
+.input label {
+  width: 20%;
+  font-size: 1.2rem;
+}
+
+.input input {
+  width: 80%;
+  border: transparent;
+  border-bottom: 1px solid black;
+  font-size: 1.2rem;
+}
+
+.input input:focus {
+  outline: none;
+}
+
+.btn {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.changeForm {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  cursor: pointer;
+}

@@ -3,7 +3,7 @@ import classes from "./log-card.module.css";
 const LogCard = ({ logData }) => {
   const { title, date, content } = logData;
   const dateString = new Date(date).toLocaleDateString("en-GB");
-  const contentArray = content.split("\n\n");
+  const contentArray = content.split("\n");
   return (
     <div className={classes.container}>
       <div className={classes.header}>

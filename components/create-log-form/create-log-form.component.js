@@ -35,7 +35,7 @@ const CreateLogForm = () => {
     console.log("Response Data ==> ", result);
   };
   return (
-    <form className={classes.logform} onSubmit={onSubmitHandler}>
+    <form className={classes.logForm} onSubmit={onSubmitHandler}>
       <div className={classes.input}>
         <label htmlFor="title">Title</label>
         <input
