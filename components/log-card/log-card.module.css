@@ -19,3 +19,11 @@
 .content p {
   margin: 1rem 0;
 }
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: rgb(110, 110, 110);
+}

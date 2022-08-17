@@ -38,11 +38,13 @@ export const saveNewLogDB = async (newLog) => {
   }
 };
 
-export const readAllLogsDB = async () => {
+export const readAllLogsDB = async (userEmail) => {
   try {
     await connectDB();
 
-    const logs = await Log.find({}).sort("-date").select("title content date");
+    const logs = await Log.find({ createdBy: userEmail })
+      .sort("-date")
+      .select("title content date createdBy");
 
     await disconnectDB();
     return logs;

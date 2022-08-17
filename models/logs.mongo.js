@@ -12,6 +12,9 @@ const logSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  createdBy: {
+    type: String,
+  },
 });
 
 export default mongoose.models["Log"]

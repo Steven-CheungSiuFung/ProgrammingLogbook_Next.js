@@ -1,7 +1,7 @@
 import classes from "./log-card.module.css";
 
 const LogCard = ({ logData }) => {
-  const { title, date, content } = logData;
+  const { title, date, content, createdBy } = logData;
   const dateString = new Date(date).toLocaleDateString("en-GB");
   const contentArray = content.split("\n");
   return (
@@ -15,6 +15,9 @@ const LogCard = ({ logData }) => {
         {contentArray.map((paragraph, index) => (
           <p key={index}>{paragraph}</p>
         ))}
+      </div>
+      <div className={classes.footer}>
+        <p>createdBy: {createdBy}</p>
       </div>
     </div>
   );

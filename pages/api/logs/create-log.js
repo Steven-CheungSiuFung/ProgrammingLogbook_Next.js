@@ -4,18 +4,14 @@ import { authOptions } from "../auth/[...nextauth]";
 import { createNewLog } from "../../../models/logs.models";
 
 const handler = async (req, res) => {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const session = await unstable_getServerSession(req, res, authOptions);
   if (!session) {
     res.status(401).json({ message: "You are not authenticated" });
     return;
   }
 
   if (req.method === "POST") {
-    const logData = req.body;
+    const logData = { ...req.body, createdBy: session.user.email };
     if (!logData || !logData.title || !logData.date || !logData.content) {
       return res.status(400).json({ message: "Missing required Input" });
     }

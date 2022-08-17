@@ -32,7 +32,6 @@ const LoginForm = () => {
           },
         });
         const data = await response.json();
-        console.log("REGISTER RESPONSE ==> ", data);
         if (data.error) {
           setErrorMessage(data.error);
         }
@@ -46,7 +45,6 @@ const LoginForm = () => {
           email: formFields.email,
           password: formFields.password,
         });
-        console.log(result);
         if (result.ok) {
           router.push("/");
         }

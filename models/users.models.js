@@ -19,6 +19,5 @@ export const createUser = async (userData) => {
 
 export const getUser = async (userEmail) => {
   const user = await getUserDB(userEmail);
-  console.log(user);
   return user;
 };

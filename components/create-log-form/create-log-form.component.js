@@ -23,7 +23,6 @@ const CreateLogForm = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log("Form Data ==> ", formData);
     const response = await fetch("/api/logs/create-log", {
       method: "POST",
       body: JSON.stringify(formData),
@@ -32,7 +31,6 @@ const CreateLogForm = () => {
       },
     });
     const result = await response.json();
-    console.log("Response Data ==> ", result);
   };
   return (
     <form className={classes.logForm} onSubmit={onSubmitHandler}>
