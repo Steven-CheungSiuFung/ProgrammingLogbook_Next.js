@@ -12,6 +12,7 @@ const LoginForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const onChangeHandler = (event) => {
@@ -21,6 +22,7 @@ const LoginForm = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (!isLogin) {
       try {
@@ -35,8 +37,10 @@ const LoginForm = () => {
         if (data.error) {
           setErrorMessage(data.error);
         }
+        router.push("/");
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
+        console.log("register error", error);
       }
     } else {
       try {
@@ -49,7 +53,8 @@ const LoginForm = () => {
           router.push("/");
         }
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
+        console.log("login error", error);
       }
     }
   };
@@ -81,9 +86,13 @@ const LoginForm = () => {
           />
         </div>
 
-        <button className={classes.btn}>
-          {isLogin ? "Login" : "Register"}
-        </button>
+        {isLoading ? (
+          <div className={classes.loading}>Loading...</div>
+        ) : (
+          <button className={classes.btn}>
+            {isLogin ? "Login" : "Register"}
+          </button>
+        )}
         <div className={classes.changeForm} onClick={onToggleForm}>
           <p>{`Change to ${isLogin ? "register" : "login"}`}</p>
         </div>

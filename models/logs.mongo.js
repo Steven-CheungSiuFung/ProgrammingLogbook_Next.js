@@ -17,6 +17,4 @@ const logSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models["Log"]
-  ? mongoose.model("Log")
-  : mongoose.model("Log", logSchema);
+export default mongoose.models?.Log || mongoose.model("Log", logSchema);

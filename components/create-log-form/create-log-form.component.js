@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import classes from "./create-log-form.module.css";
 
 const DEFAULT_FORMDATA = {
@@ -9,6 +10,8 @@ const DEFAULT_FORMDATA = {
 
 const CreateLogForm = () => {
   const [formData, setFormData] = useState(DEFAULT_FORMDATA);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const onChangeHandler = (event) => {
     const target = event.target.name;
     const value = event.target.value;
@@ -23,14 +26,27 @@ const CreateLogForm = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    const response = await fetch("/api/logs/create-log", {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const result = await response.json();
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/logs/create-log", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status === 201) {
+        router.push("/logs");
+      } else {
+        const data = await response.json();
+        setIsLoading(false);
+        console.log("something wrong", data);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.error("create new log error", error);
+    }
   };
   return (
     <form className={classes.logForm} onSubmit={onSubmitHandler}>
@@ -63,7 +79,11 @@ const CreateLogForm = () => {
         />
       </div>
 
-      <button className={classes.btn}>Save</button>
+      {isLoading ? (
+        <div className={classes.loading}>Loading...</div>
+      ) : (
+        <button className={classes.btn}>Save</button>
+      )}
     </form>
   );
 };

@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+// import * as mongoose from "mongoose";
 import Log from "../models/logs.mongo";
 import User from "../models/users.mongo";
 
-const connectDB = async () => {
+export const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URL);
     console.log("MongoDB connected");
@@ -11,7 +12,7 @@ const connectDB = async () => {
   }
 };
 
-const disconnectDB = async () => {
+export const disconnectDB = async () => {
   try {
     await mongoose.disconnect();
     console.log("MongoDB disconnected");
@@ -22,8 +23,6 @@ const disconnectDB = async () => {
 
 export const saveNewLogDB = async (newLog) => {
   try {
-    await connectDB();
-
     const logDoc = new Log(newLog);
     const result = await logDoc.save();
 
@@ -31,7 +30,6 @@ export const saveNewLogDB = async (newLog) => {
       console.log("New document saved!");
     }
 
-    await disconnectDB();
     return result;
   } catch (error) {
     console.error("save new log to database fail", error);
@@ -40,13 +38,10 @@ export const saveNewLogDB = async (newLog) => {
 
 export const readAllLogsDB = async (userEmail) => {
   try {
-    await connectDB();
-
     const logs = await Log.find({ createdBy: userEmail })
       .sort("-date")
       .select("title content date createdBy");
 
-    await disconnectDB();
     return logs;
   } catch (error) {
     console.error("read logs from database fail", error);
@@ -55,8 +50,6 @@ export const readAllLogsDB = async (userEmail) => {
 
 export const saveUserDB = async (newUser) => {
   try {
-    await connectDB();
-
     const user = new User(newUser);
     const result = await user.save();
 
@@ -64,7 +57,6 @@ export const saveUserDB = async (newUser) => {
       console.log("New User saved!");
     }
 
-    await disconnectDB();
     return result;
   } catch (error) {
     console.error("save new log to database fail", error);
@@ -73,11 +65,8 @@ export const saveUserDB = async (newUser) => {
 
 export const getUserDB = async (userEmail) => {
   try {
-    await connectDB();
-
     const user = await User.findOne({ email: userEmail });
 
-    await disconnectDB();
     return user;
   } catch (error) {
     console.error("get user from database fail", error);

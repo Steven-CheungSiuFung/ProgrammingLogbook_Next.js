@@ -1,3 +1,5 @@
+import { connectDB } from "../services/db-utils";
+
 import classes from "./index.module.css";
 
 export default function Home() {
@@ -7,3 +9,10 @@ export default function Home() {
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  connectDB();
+  return {
+    props: {},
+  };
+};
