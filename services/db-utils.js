@@ -22,6 +22,7 @@ export const disconnectDB = async () => {
 
 export const saveNewLogDB = async (newLog) => {
   try {
+    await connectDB();
     const logDoc = new Log(newLog);
     const result = await logDoc.save();
 
@@ -37,6 +38,7 @@ export const saveNewLogDB = async (newLog) => {
 
 export const readAllLogsDB = async (userEmail) => {
   try {
+    await connectDB();
     const logs = await Log.find({ createdBy: userEmail })
       .sort("-date")
       .select("title content date createdBy");

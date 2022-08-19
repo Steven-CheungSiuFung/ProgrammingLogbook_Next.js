@@ -11,7 +11,6 @@ export default function Home() {
 }
 
 export const getStaticProps = async () => {
-  connectDB();
   return {
     props: {},
   };
