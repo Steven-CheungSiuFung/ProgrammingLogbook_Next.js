@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-// import * as mongoose from "mongoose";
 import Log from "../models/logs.mongo";
 import User from "../models/users.mongo";
 
@@ -50,6 +49,7 @@ export const readAllLogsDB = async (userEmail) => {
 
 export const saveUserDB = async (newUser) => {
   try {
+    await connectDB();
     const user = new User(newUser);
     const result = await user.save();
 
@@ -65,6 +65,7 @@ export const saveUserDB = async (newUser) => {
 
 export const getUserDB = async (userEmail) => {
   try {
+    await connectDB();
     const user = await User.findOne({ email: userEmail });
 
     return user;
